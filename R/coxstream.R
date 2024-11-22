@@ -16,14 +16,12 @@
 #' @examples
 #' library(CoxStream)
 #' formula <- Surv(time, status) ~ X1 + X2 + X3 + X4 + X5
-#' data <- sim[sim$batch_id == 1, ]
 #' fit <- coxstream(
-#'   formula, data,
-#'   degree = 4, boundary = c(0, 3), idx_col = "patient_id"
+#'   formula, sim[sim$batch_id == 1, ],
+#'   degree = 6, boundary = c(0, 3), idx_col = "patient_id"
 #' )
 #' for (batch in 2:10) {
-#'   data <- sim[sim$batch_id == batch, ]
-#'   fit <- update(fit, data)
+#'   fit <- update(fit, sim[sim$batch_id == batch, ])
 #' }
 #' summary(fit)
 coxstream <- function(formula, data, degree, boundary, idx_col) {
@@ -61,7 +59,11 @@ coxstream <- function(formula, data, degree, boundary, idx_col) {
     theta_prev = theta_prev, hess_prev = hess_prev, time_overlap = time_overlap
   )
   coef <- sr$par
-  hess <- sr$hessian
+  hess <- hess(
+    sr$par,
+    x = x, time = time, delta = delta, degree = degree, boundary = boundary, 
+    theta_prev = theta_prev, hess_prev = hess_prev, time_overlap = time_overlap
+  )
   coef_names <- c(paste0("Basis ", 1:(degree + 1)), colnames(x))
   names(coef) <- coef_names
   colnames(hess) <- rownames(hess) <- coef_names

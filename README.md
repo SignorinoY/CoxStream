@@ -30,34 +30,32 @@ library(CoxStream)
 #> Loading required package: survival
 
 formula <- Surv(time, status) ~ X1 + X2 + X3 + X4 + X5
-data <- sim[sim$batch == 1, ]
 fit <- coxstream(
-  formula, data,
-  degree = 4, boundary = c(0, 3), idx_col = "patient_id"
+  formula, sim[sim$batch_id == 1, ],
+  degree = 6, boundary = c(0, 3), idx_col = "patient_id"
 )
 for (batch in 2:10) {
-  data <- sim[sim$batch_id == batch, ]
-  fit <- update(fit, data)
+  fit <- update(fit,  sim[sim$batch_id == batch, ])
 }
 summary(fit)
 #> Call:
-#> coxstream(formula = formula, data = data, degree = 4, boundary = c(0, 
-#>     3), idx_col = "patient_id")
+#> coxstream(formula = formula, data = sim[sim$batch_id == 1, ], 
+#>     degree = 6, boundary = c(0, 3), idx_col = "patient_id")
 #> 
 #>       coef exp(coef)      se     z      p    
-#> X1 0.96863   2.63433 0.05107 18.97 <2e-16 ***
-#> X2 0.99687   2.70979 0.05355 18.61 <2e-16 ***
-#> X3 0.99165   2.69567 0.05368 18.47 <2e-16 ***
-#> X4 0.88256   2.41709 0.05205 16.96 <2e-16 ***
-#> X5 1.01819   2.76817 0.05093 19.99 <2e-16 ***
+#> X1 0.99429   2.70279 0.05158 19.28 <2e-16 ***
+#> X2 1.01869   2.76957 0.05358 19.01 <2e-16 ***
+#> X3 1.01620   2.76267 0.05405 18.80 <2e-16 ***
+#> X4 0.90315   2.46736 0.05193 17.39 <2e-16 ***
+#> X5 1.04018   2.82974 0.05141 20.23 <2e-16 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #>    exp(coef) exp(-coef) lower .95 upper .95
-#> X1 2.6343    0.3796     2.3834    2.9117   
-#> X2 2.7098    0.3690     2.4398    3.0097   
-#> X3 2.6957    0.3710     2.4265    2.9948   
-#> X4 2.4171    0.4137     2.1827    2.6767   
-#> X5 2.7682    0.3612     2.5052    3.0587
+#> X1 2.7028    0.3700     2.4429    2.9903   
+#> X2 2.7696    0.3611     2.4935    3.0762   
+#> X3 2.7627    0.3620     2.4850    3.0714   
+#> X4 2.4674    0.4053     2.2286    2.7317   
+#> X5 2.8297    0.3534     2.5585    3.1297
 ```
 
 ## Code of Conduct

@@ -58,7 +58,12 @@ update.coxstream <- function(object, data, ...) {
   )
 
   object$theta_prev <- sr$par
-  object$hess_prev <- sr$hessian
+  object$hess_prev <- hess(
+    sr$par,
+    x = x, time = time, delta = delta, degree = object$degree,
+    boundary = object$boundary, theta_prev = theta_prev, hess_prev = hess_prev,
+    time_overlap = time_overlap
+  )
   object$time_stored <- time_stored
   object$n_passes <- object$n_passes + length(patients_new)
   class(object) <- "coxstream"

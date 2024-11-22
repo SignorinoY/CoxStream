@@ -59,5 +59,9 @@ hess <- function(
     hess3 <- 0
   }
 
-  hess1 + hess2 + hess3
+  hess <- hess1 + hess2 + hess3
+  if (det(hess) < 1e-10) {
+    hess <- hess + lambda * diag(q + p)
+  }
+  return(hess)
 }

@@ -32,5 +32,5 @@ fn <- function(
     l3 <- 0
   }
 
-  l1 + l2 + l3
+  as.numeric(l1 + l2 + l3)
 }
