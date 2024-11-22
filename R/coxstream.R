@@ -16,7 +16,7 @@
 #' @examples
 #' library(CoxStream)
 #' formula <- Surv(time, status) ~ X1 + X2 + X3 + X4 + X5
-#' data <- sim[sim$batch == 1, ]
+#' data <- sim[sim$batch_id == 1, ]
 #' fit <- coxstream(
 #'   formula, data,
 #'   degree = 4, boundary = c(0, 3), idx_col = "patient_id"
