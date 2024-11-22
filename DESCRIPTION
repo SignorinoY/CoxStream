@@ -1,0 +1,41 @@
+Type: Package
+Package: CoxStream
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: 
+    person("Ziyang", "Gong", , "gongziyang@smail.swufe.edu.cn", role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line) Use four
+    spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+URL: https://github.com/SignorinoY/CoxStream,
+    http://gongziyang.com/CoxStream/
+BugReports: https://github.com/SignorinoY/CoxStream/issues
+Depends: 
+    R (>= 4.0),
+    survival
+Imports: 
+    cli,
+    deSolve,
+    glue,
+    lifecycle,
+    optimx,
+    rlang (>= 1.1.0),
+    splines2,
+    stats,
+    withr
+Suggests: 
+    devtools,
+    lintr,
+    pkgdown,
+    renv,
+    rmarkdown,
+    spelling,
+    styler,
+    testthat (>= 3.0.0),
+    usethis
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

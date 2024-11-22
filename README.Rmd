@@ -1,0 +1,56 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# CoxStream
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/SignorinoY/CoxStream/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/SignorinoY/CoxStream/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/SignorinoY/CoxStream/graph/badge.svg)](https://app.codecov.io/gh/SignorinoY/CoxStream)
+<!-- badges: end -->
+
+The goal of CoxStream is to ...
+
+## Installation
+
+You can install the development version of CoxStream like so:
+
+``` r
+# install.packages("pak")
+pak::pak("SignorinoY/CoxStream")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(CoxStream)
+
+formula <- Surv(time, status) ~ X1 + X2 + X3 + X4 + X5
+data <- sim[sim$batch == 1, ]
+fit <- coxstream(
+  formula, data,
+  degree = 4, boundary = c(0, 3), idx_col = "patient_id"
+)
+for (batch in 2:10) {
+  data <- sim[sim$batch_id == batch, ]
+  fit <- update(fit, data)
+}
+summary(fit)
+```
+
+## Code of Conduct
+
+Please note that the CoxStream project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

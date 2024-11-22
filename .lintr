@@ -1,0 +1,10 @@
+linters: linters_with_defaults(
+    object_name_linter = object_name_linter(styles = c("snake_case", "dotted.case")),
+    cyclocomp_linter = NULL
+  ) # see vignette("lintr")
+exclusions: list(
+    "R/import-standalone-obj-type.R",
+    "R/import-standalone-purrr.R",
+    "R/import-standalone-types-check.R"
+  )
+encoding: "UTF-8"
